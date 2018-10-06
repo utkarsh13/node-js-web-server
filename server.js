@@ -3,6 +3,7 @@ const hbs = require('hbs');
 const fs = require('fs');
 const getReminders = require("./GetReminders");
 const moment = require('moment');
+const oofSetting = require("./SetUserOofSettings");
 
 const port = process.env.PORT || 3000
 
@@ -57,6 +58,15 @@ app.get('/getReminders', (req, res) => {
         console.log("utkarsh" + result);
         console.log(moment());
         res.send(result);
+    });
+});
+
+app.get('/oof', (req, res) => {
+    console.log(moment());
+    return oofSetting.setOof().then((result) => {
+        console.log("utkarsh" + result);
+
+        res.send("Out of office setting saved successfully." + JSON.stringify(result));
     });
 });
 
