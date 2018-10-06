@@ -1,9 +1,6 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
-const getReminders = require("./GetReminders");
-const moment = require('moment');
-const oofSetting = require("./SetUserOofSettings");
 
 const port = process.env.PORT || 3000
 
@@ -50,24 +47,6 @@ app.get('/', (req, res) => {
 		pageTitle: 'Home Page', 
 		welcomeMessage: 'Welcome here'
 	});
-});
-
-app.get('/getReminders', (req, res) => {
-    console.log(moment());
-    return getReminders.getRemindersJson().then((result) => {
-        console.log("utkarsh" + result);
-        console.log(moment());
-        res.send(result);
-    });
-});
-
-app.get('/oof', (req, res) => {
-    console.log(moment());
-    return oofSetting.setOof().then((result) => {
-        console.log("utkarsh" + result);
-
-        res.send("Out of office setting saved successfully." + JSON.stringify(result));
-    });
 });
 
 app.get('/about', (req, res) => {
